@@ -1,3 +1,6 @@
 ul#productList
   - @products.each do |product|
     li = product.name
+    ul
+      li = product.price
+      li = product.description
