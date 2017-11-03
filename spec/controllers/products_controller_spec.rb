@@ -12,5 +12,11 @@ RSpec.describe ProductsController, type: :controller do
       get :index
       expect(assigns(:products)).to eq products
     end
+
+    it 'assigns @categories with details of categories' do
+      categories = Array.new(5) { FactoryBot.create :category }
+      get :index
+      expect(assigns(:categories)).to eq categories
+    end
   end
 end
