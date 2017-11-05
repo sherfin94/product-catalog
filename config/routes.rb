@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   namespace :products do
-    get 'filtered/index'
+    get 'filtered/index/:categories', to: 'filtered#index'
   end
 
   get 'products/index'
