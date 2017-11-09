@@ -25,7 +25,7 @@ RSpec.describe 'products/index.html.slim', type: :view do
     @categories = @category_names.map do |category_name|
       FactoryBot.build_stubbed :category, name: category_name
     end
-    assign :categories, @categories
+    assign :hierarchically_ordered_categories, @categories
   end
 
   it 'displays all the product names, descriptions and prices' do
