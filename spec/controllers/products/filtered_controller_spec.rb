@@ -29,7 +29,21 @@ RSpec.describe Products::FilteredController, type: :controller do
       result = response.body
       expected_result = { products: dummy_products_list }.to_json
 
-      expect(result).to eq expected_result
+      expect(assigns(:products)).to eq dummy_products_list
+    end
+
+    it 'assigns @hierarchically_ordered_categories with the result
+      obtained from HierarchicallyOrderedCategoriesQuery query object' do
+      place_holder_result = 'place_holder_result'
+      allow_any_instance_of(HierarchicallyOrderedCategoriesQuery)
+        .to receive(:all)
+        .and_return(place_holder_result)
+
+      params = { categories: [@category.id] }
+      get :index, params: params
+
+      expect(assigns(:hierarchically_ordered_categories))
+        .to eq place_holder_result
     end
   end
 end
