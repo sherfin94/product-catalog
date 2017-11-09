@@ -7,7 +7,7 @@
         li
           .col[class="s#{category.level + 1}"]
           p
-            input.categoryCheckBox[type='checkbox', id="checkBox#{index}" data-id="#{category.id}"]
+            input.filled-in.categoryCheckBox[type='checkbox', id="checkBox#{index}" data-id="#{category.id}"]
             label.black-text[for="checkBox#{index}"] = category.name
   .col.s8
     ul#productList
