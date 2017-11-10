@@ -1,0 +1,26 @@
+$(function() {
+
+  const productsIndexBaseUrl = "<%= Rails.application.routes.url_helpers.products_index_path %>";
+  const productsFilterBaseUrl = "<%= Rails.application.routes.url_helpers.products_path categories: [] %>";
+
+  const getSelectedCheckBoxIds = function() {
+    return $.map(
+      $('.categoryCheckBox:checked'), function(c) {return $(c).data('id')}
+    )
+  }
+
+  const sendFilterRequest = function(categories, callback) {
+    const baseURL = (categories.length > 0)? productsFilterBaseUrl : productsIndexBaseUrl;
+    const requestURL = baseURL + categories.join(' ')
+    window.location.replace(requestURL)
+  }
+
+  $('.categoryCheckBox').change(function() {
+    console.log('dfg');
+    sendFilterRequest(getSelectedCheckBoxIds(), function(result) {
+      console.log(result);
+      }
+    );
+  });
+
+})
