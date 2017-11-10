@@ -16,7 +16,8 @@ class HierarchicallyOrderedCategoriesQuery
     OpenStruct.new(
       name: category.name,
       level: category.level,
-      id: category.id
+      id: category.id,
+      parent_id: category.parent_id
     )
   end
 
