@@ -15,12 +15,41 @@ $(function() {
     window.location.replace(requestURL)
   }
 
-  $('.categoryCheckBox').change(function() {
-    console.log('dfg');
-    sendFilterRequest(getSelectedCheckBoxIds(), function(result) {
-      console.log(result);
-      }
-    );
-  });
+  const recursiveCheck = function(id) {
+    if(id == '') { return true }
+    else {
+      const checkBox = $("#checkBox" + id)
+      checkBox.prop('checked', true)
+      recursiveCheck(checkBox.data('parentId'))
+    }
+  }
 
+  const recursiveUncheck = function(ids) {
+    if(ids.length == 0) { return true }
+    else {
+      var allChildIds = []
+      ids.forEach(function(id) {
+        const checkBox = $("#checkBox" + id)
+        checkBox.prop('checked', false)
+        if(id != '') {
+          const children = $(".categoryCheckBox[data-parent-id=" + id + "]")
+          const childIds = $.each(children, function(index, child) {
+            allChildIds.push($(child).data('id'))
+          })
+        }
+      })
+      recursiveUncheck(allChildIds)
+    }
+  }
+
+  $('.categoryCheckBox').change(function(event) {
+    const checkBox = $(event.target)
+    const checkBoxId = checkBox.data('id')
+    if(checkBox.prop('checked') == false) {
+      recursiveUncheck([checkBoxId])
+    } else {
+      recursiveCheck(checkBoxId);
+    }
+    sendFilterRequest(getSelectedCheckBoxIds())
+  });
 })
