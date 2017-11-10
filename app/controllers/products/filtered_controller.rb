@@ -1,6 +1,6 @@
 class Products::FilteredController < ApplicationController
   def index
-    query_object = ProductsUnderCategoriesQuery.new category_ids_in_params
+    query_object = FilterProductsByCategoriesQuery.new category_ids_in_params
     @products = query_object.all
     @hierarchically_ordered_categories =
       HierarchicallyOrderedCategoriesQuery.new.all

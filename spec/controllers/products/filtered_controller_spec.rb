@@ -18,9 +18,9 @@ RSpec.describe Products::FilteredController, type: :controller do
       passed, and returns the result in JSON format' do
       new_category = FactoryBot.create :category
       dummy_products_list = [{ name: 'test' }]
-      query_object = ProductsUnderCategoriesQuery.new
+      query_object = FilterProductsByCategoriesQuery.new
 
-      expect(ProductsUnderCategoriesQuery).to receive(:new)
+      expect(FilterProductsByCategoriesQuery).to receive(:new)
         .with([@category.id, new_category.id]).and_return query_object
       expect(query_object).to receive(:all).and_return dummy_products_list
 

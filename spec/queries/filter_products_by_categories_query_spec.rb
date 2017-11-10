@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe ProductsUnderCategoriesQuery do
+describe FilterProductsByCategoriesQuery do
   describe '#all' do
     before(:each) do
       @categories = Array.new(3) { FactoryBot.create :category }
@@ -39,6 +39,14 @@ describe ProductsUnderCategoriesQuery do
       result = described_class.new.all
 
       expect(result).to be_empty
+    end
+
+    it 'does not return the products of categories which are parents of
+      any other category in params' do
+      @second_category.move_to_child_of @first_category
+      result = described_class.new([@first_category.id, @second_category.id]).all.pluck(:id)
+
+      expect(result).not_to include(*@first_category.products.pluck(:id))
     end
   end
 end
