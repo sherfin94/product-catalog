@@ -9,7 +9,7 @@ RSpec.describe Products::FilteredController, type: :controller do
       end
     end
     it 'returns http success' do
-      params = { categories: "#{}@category.id" }
+      params = { categories: "#{@category.id}" }
       get :index, params: params
       expect(response).to have_http_status(:success)
     end
