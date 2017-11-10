@@ -9,7 +9,7 @@ RSpec.describe Products::FilteredController, type: :controller do
       end
     end
     it 'returns http success' do
-      params = { categories: [@category.id] }
+      params = { categories: "#{}@category.id" }
       get :index, params: params
       expect(response).to have_http_status(:success)
     end
@@ -21,7 +21,7 @@ RSpec.describe Products::FilteredController, type: :controller do
       query_object = ProductsUnderCategoriesQuery.new
 
       expect(ProductsUnderCategoriesQuery).to receive(:new)
-        .with([@category.id.to_s, new_category.id.to_s]).and_return query_object
+        .with([@category.id, new_category.id]).and_return query_object
       expect(query_object).to receive(:all).and_return dummy_products_list
 
       params = { categories: "#{@category.id} #{new_category.id}" }
@@ -39,11 +39,20 @@ RSpec.describe Products::FilteredController, type: :controller do
         .to receive(:all)
         .and_return(place_holder_result)
 
-      params = { categories: [@category.id] }
+      params = { categories: "#{@category.id}" }
       get :index, params: params
 
       expect(assigns(:hierarchically_ordered_categories))
         .to eq place_holder_result
+    end
+
+    it 'assigns @checked_category_ids with the ids that are received
+      through params' do
+      new_category = FactoryBot.create :category
+      params = { categories: "#{@category.id} #{new_category.id}" }
+      get :index, params: params
+
+      expect(assigns(:checked_category_ids)).to eq [@category.id, new_category.id]
     end
   end
 end
