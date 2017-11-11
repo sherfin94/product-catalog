@@ -37,4 +37,20 @@ describe HierarchicallyOrderedCategoriesQuery do
         .to eq expected_result
     end
   end
+
+  describe '#non_empty' do
+    it 'returns hierarchically ordered set of non-empty categories' do
+      first_category, second_category, third_category =
+        Array.new(3) { FactoryBot.create(:category) }
+      second_category.move_to_child_of first_category
+      third_category.move_to_child_of second_category
+      [first_category, second_category].each do |category|
+        category.products.push FactoryBot.create(:product)
+      end
+
+      result = HierarchicallyOrderedCategoriesQuery.new.non_empty
+
+      expect(result.pluck :id).to eq [first_category, second_category].pluck :id
+    end
+  end
 end

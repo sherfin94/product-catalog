@@ -10,6 +10,17 @@ class HierarchicallyOrderedCategoriesQuery
     .compact
   end
 
+  def non_empty
+    non_empty_category_ids = non_empty_categories.pluck :id
+    nested_set_options(Category) do |category|
+      if non_empty_category_ids.include? category.id
+        slice_name_level_and_id(category)
+      end
+    end
+    .collect(&:first)
+    .compact
+  end
+
   private
 
   def non_empty_categories
