@@ -3,7 +3,7 @@ class Products::FilteredController < ApplicationController
     query_object = FilterProductsByCategoriesQuery.new category_ids_in_params
     @products = query_object.all
     @hierarchically_ordered_categories =
-      HierarchicallyOrderedCategoriesQuery.new.all
+      HierarchicallyOrderedCategoriesQuery.new.non_empty
     @checked_category_ids = category_ids_in_params
   end
 

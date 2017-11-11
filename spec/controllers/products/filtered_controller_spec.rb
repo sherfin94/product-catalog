@@ -36,7 +36,7 @@ RSpec.describe Products::FilteredController, type: :controller do
       obtained from HierarchicallyOrderedCategoriesQuery query object' do
       place_holder_result = 'place_holder_result'
       allow_any_instance_of(HierarchicallyOrderedCategoriesQuery)
-        .to receive(:all)
+        .to receive(:non_empty)
         .and_return(place_holder_result)
 
       params = { categories: "#{@category.id}" }
