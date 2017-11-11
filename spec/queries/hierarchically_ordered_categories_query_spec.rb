@@ -10,7 +10,7 @@ describe HierarchicallyOrderedCategoriesQuery do
         FactoryBot.build :category
       end
 
-      expect_any_instance_of(NonEmptyCategoriesQuery).to receive(:all)
+      allow_any_instance_of(NonEmptyCategoriesQuery).to receive(:all)
         .and_return(place_holder_non_empty_categories_list)
 
       place_holder_nested_set_options_result =
@@ -18,12 +18,17 @@ describe HierarchicallyOrderedCategoriesQuery do
 
       expect(ActionController::Base.helpers)
         .to receive(:nested_set_options)
-        .with(place_holder_non_empty_categories_list)
+        .with(Category)
         .and_return(place_holder_nested_set_options_result)
 
-      expected_result = 'place_holder_final_result'
-      expect(place_holder_nested_set_options_result)
+      place_holder_collect_result = %w[place holder collect result]
+      allow(place_holder_nested_set_options_result)
         .to receive(:collect)
+        .and_return(place_holder_collect_result)
+
+      expected_result = 'place_holder_final_result'
+      allow(place_holder_collect_result)
+        .to receive(:compact)
         .and_return(expected_result)
 
       result = described_class.new.all
