@@ -1,5 +1,16 @@
 require 'rails_helper'
 
-RSpec.describe "categories/index.html.slim", type: :view do
-  pending "add some examples to (or delete) #{__FILE__}"
+RSpec.describe "admin/categories/index.html.slim", type: :view do
+  it 'displays the names of all the available catgories' do
+    dummy_names = %w[some sample words for testing purpose]
+    categories = []
+    dummy_names.each do |dummy_name|
+      categories.push FactoryBot.build :category, name: dummy_name
+    end
+    assign :hierarchically_ordered_categories, categories
+
+    render
+
+    expect(rendered).to include(*dummy_names)
+  end
 end

@@ -1,2 +1,4 @@
-h1 Admin::Categories#index
-p Find me in app/views/admin/categories/index.html.slim
+.row
+  = render partial: 'products/hierarchically_ordered_categories',
+    locals: { categories: @hierarchically_ordered_categories,
+              checked_category_ids: [], title: ''}
