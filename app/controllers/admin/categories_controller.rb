@@ -3,4 +3,8 @@ class Admin::CategoriesController < ApplicationController
     @hierarchically_ordered_categories =
       HierarchicallyOrderedCategoriesQuery.new.all
   end
+
+  def new
+    @category = Category.new
+  end
 end

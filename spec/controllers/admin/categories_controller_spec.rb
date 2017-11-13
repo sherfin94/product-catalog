@@ -21,4 +21,15 @@ RSpec.describe Admin::CategoriesController, type: :controller do
       end
   end
 
+  describe 'GET #new' do
+    it "returns http success" do
+      get :new
+      expect(response).to have_http_status(:success)
+    end
+
+    it 'build an empty category and assigns it to @category' do
+      get :new
+      expect(assigns(:category)).to be_instance_of(Category)
+    end
+  end
 end
