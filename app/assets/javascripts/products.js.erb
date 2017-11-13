@@ -42,7 +42,7 @@ $(function() {
     }
   }
 
-  $('.categoryCheckBox').change(function(event) {
+  const autoTick = function(event) {
     const checkBox = $(event.target)
     const checkBoxId = checkBox.data('id')
     if(checkBox.prop('checked') == false) {
@@ -51,5 +51,7 @@ $(function() {
       recursiveCheck(checkBoxId);
     }
     sendFilterRequest(getSelectedCheckBoxIds())
-  });
+  }
+
+  $('#categoryList .categoryCheckBox').change(autoTick);
 })
