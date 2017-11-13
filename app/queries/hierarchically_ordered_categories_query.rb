@@ -1,6 +1,6 @@
 class HierarchicallyOrderedCategoriesQuery
   def all
-    nested_set_options(Category, &:slice_name_level_and_id)
+    nested_set_options(Category) { |category| slice_name_level_and_id(category) }
       .collect(&:first)
       .compact
   end
