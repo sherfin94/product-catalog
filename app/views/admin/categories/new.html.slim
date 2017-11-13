@@ -1,0 +1,9 @@
+= form_for @category, url: admin_categories_path do |form|
+  .row
+    .input-field.col.s6
+      = form.text_field :name
+      = form.label :name
+  .row
+    .input-field.col.s6
+      = form.select :parent_id, nested_set_options(Category, @category) {|i| "#{'-' * i.level} #{i.name}" }
+  = form.submit class: 'btn'
