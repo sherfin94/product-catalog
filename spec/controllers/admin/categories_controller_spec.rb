@@ -32,4 +32,22 @@ RSpec.describe Admin::CategoriesController, type: :controller do
       expect(assigns(:category)).to be_instance_of(Category)
     end
   end
+
+  describe 'POST #create' do
+    before(:each) do
+      @category_params = FactoryBot.attributes_for :category
+    end
+
+    it 'creates a new Category' do
+      expect {
+        post :create, params: { category: @category_params }
+      }.to change(Category, :count).by 1
+    end
+
+    it 'redirects to Admin::Categories#index' do
+      post :create, params: { category: @category_params }
+
+      expect(response).to redirect_to admin_categories_index_path
+    end
+  end
 end
