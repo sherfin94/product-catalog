@@ -16,7 +16,7 @@ RSpec.describe Admin::CategoriesController, type: :controller do
           .and_return place_holder_categories
 
         get :index
-        expect(assigns(:hierarchically_ordered_categoryies))
+        expect(assigns(:hierarchically_ordered_categories))
           .to eq place_holder_categories
       end
   end
