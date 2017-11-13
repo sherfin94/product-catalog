@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
   namespace :admin do
-    get 'categories/index'
-    get 'categories/new'
-    get 'categories/create'
+    resources :categories, only: %i[index new create destroy]
   end
 
   get 'admin/index'
