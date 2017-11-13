@@ -10,7 +10,12 @@ class Admin::CategoriesController < ApplicationController
 
   def create
     Category.create category_params
-    redirect_to admin_categories_index_path
+    redirect_to admin_categories_path
+  end
+
+  def destroy
+    category = Category.find params[:id]
+    category.delete
   end
 
   private
