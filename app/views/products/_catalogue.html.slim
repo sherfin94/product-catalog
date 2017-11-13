@@ -1,8 +1,9 @@
 .row.blue.lighten-5
   .col.s4
-    = render partial: 'products/hierarchically_ordered_categories',
-        locals: { categories: @hierarchically_ordered_categories,
-                checked_category_ids: checked_category_ids }
+    #categoryList
+      = render partial: 'products/hierarchically_ordered_categories',
+          locals: { categories: @hierarchically_ordered_categories,
+                  checked_category_ids: checked_category_ids, title: 'Filter' }
   .col.s8
     ul#productList
       - @products.each do |product|

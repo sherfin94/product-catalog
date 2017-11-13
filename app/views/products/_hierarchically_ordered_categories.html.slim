@@ -1,6 +1,6 @@
 ul.collection
   li.collection-header
-    h4 Filter
+    h4 = title
   - categories.each_with_index do |category, index|
     li
       .col[class="s#{category.level + 1}"]
