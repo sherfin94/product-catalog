@@ -8,8 +8,15 @@ class Admin::ProductsController < ApplicationController
   end
 
   def create
+    Product.create product_params
   end
 
   def destroy
+  end
+
+  private
+
+  def product_params
+    params.require(:product).permit(:name, :description, :price)
   end
 end

@@ -28,9 +28,19 @@ RSpec.describe Admin::ProductsController, type: :controller do
   end
 
   describe "POST #create" do
+    before(:each) do
+      @product_params = FactoryBot.attributes_for :product
+    end
+
     it "returns http success" do
-      post :create
+      post :create, params: { product: @product_params }
       expect(response).to have_http_status(:success)
+    end
+
+    it 'creates a new Product' do
+      expect {
+        post :create, params: { product: @product_params }
+      }.to change(Product, :count).by 1
     end
   end
 
