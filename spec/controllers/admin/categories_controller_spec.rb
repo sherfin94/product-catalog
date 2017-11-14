@@ -52,11 +52,20 @@ RSpec.describe Admin::CategoriesController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
+    before(:each) do
+      @category = FactoryBot.create :category
+    end
+
     it 'destroys the category provided through params' do
-      category = FactoryBot.create :category
       expect {
-        delete :destroy, params: {id: category.id}
+        delete :destroy, params: {id: @category.id}
       }.to change(Category, :count).by -1
+    end
+
+    it 'redirects to Admin::Categories#index' do
+      delete :destroy, params: { id: @category.id }
+
+      expect(response).to redirect_to admin_categories_path
     end
   end
 end
