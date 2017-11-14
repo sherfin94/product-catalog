@@ -9,6 +9,7 @@ class Admin::ProductsController < ApplicationController
 
   def create
     Product.create product_params
+    redirect_to admin_products_path
   end
 
   def destroy

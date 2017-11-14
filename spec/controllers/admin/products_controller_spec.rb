@@ -32,15 +32,15 @@ RSpec.describe Admin::ProductsController, type: :controller do
       @product_params = FactoryBot.attributes_for :product
     end
 
-    it "returns http success" do
-      post :create, params: { product: @product_params }
-      expect(response).to have_http_status(:success)
-    end
-
     it 'creates a new Product' do
       expect {
         post :create, params: { product: @product_params }
       }.to change(Product, :count).by 1
+    end
+
+    it 'redirects to admin_products_path' do
+      post :create, params: { product: @product_params }
+      expect(response).to redirect_to admin_products_path
     end
   end
 
