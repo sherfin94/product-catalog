@@ -1,4 +1,18 @@
-- @products.each do |product|
-  p = product.name
-  p = product.description
-  p = product.price
+.row
+  .col.s8
+    table.striped
+      thead
+        tr
+          th ID
+          th Name
+          th Description
+          th Price
+          th Delete
+      tbody
+        - @products.each do |product|
+          tr
+            td = product.id
+            td = product.name
+            td = product.description
+            td = product.price
+            td Delete
