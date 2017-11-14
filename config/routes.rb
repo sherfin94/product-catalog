@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     resources :categories, only: %i[index new create destroy]
   end
 
-  get 'admin/index'
+  resources :admin, only: %i[index]
 
   namespace :products do
     resources :filtered, only: %i[index]
