@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
   namespace :admin do
     resources :categories, only: %i[index new create destroy]
+    resources :products, only: %i[index new create destroy]
   end
-
+  
   resources :admin, only: %i[index]
 
   namespace :products do
@@ -10,6 +11,4 @@ Rails.application.routes.draw do
   end
 
   resources :products, only: %i[index]
-
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
