@@ -1,2 +1,19 @@
-h1 Admin::Products#new
-p Find me in app/views/admin/products/new.html.slim
+= form_for @product, url: admin_products_path do |form|
+  .row
+    .input-field.col.s6
+      = form.text_field :name
+      = form.label :name
+  .row
+    .input-field.col.s6
+      = form.text_field :description
+      = form.label :description
+  .row
+    .input-field.col.s6
+      = form.text_field :price
+      = form.label :price
+  .row
+    .input-field.col.s6
+      = select_tag 'category_ids',
+      options_for_select(nested_set_options(Category) {|i| "#{'-' * i.level} #{i.name}" } ),
+      multiple: true
+  = form.submit class: 'btn'
