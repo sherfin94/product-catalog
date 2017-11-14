@@ -7,6 +7,12 @@ RSpec.describe Admin::ProductsController, type: :controller do
       get :index
       expect(response).to have_http_status(:success)
     end
+
+    it 'assigns @products will all products' do
+      products = Array.new(5) { FactoryBot.create :product }
+      get :index
+      expect(assigns(:products)).to match_array products
+    end
   end
 
   describe "GET #new" do
