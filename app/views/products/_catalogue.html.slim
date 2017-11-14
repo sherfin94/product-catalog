@@ -3,7 +3,8 @@
     #categoryList
       = render partial: 'products/hierarchically_ordered_categories',
           locals: { categories: @hierarchically_ordered_categories,
-                  checked_category_ids: checked_category_ids, title: 'Filter' }
+                  checked_category_ids: checked_category_ids, title: 'Filter',
+                  display_admin_controls: false }
   .col.s8
     ul#productList
       - @products.each do |product|
