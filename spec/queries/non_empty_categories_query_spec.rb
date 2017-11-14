@@ -14,7 +14,7 @@ describe NonEmptyCategoriesQuery do
       expected_result = @categories.first(2)
       result = NonEmptyCategoriesQuery.new.all
 
-      expect(result).to eq expected_result
+      expect(result).to match_array expected_result
     end
 
     it 'considers parent categories of non-empty categories as non-empty' do
