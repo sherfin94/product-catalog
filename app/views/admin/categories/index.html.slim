@@ -1,10 +1,16 @@
 .row
   .col.s8
-    = render partial: 'products/hierarchically_ordered_categories',
-      locals: { categories: @hierarchically_ordered_categories,
-                checked_category_ids: [],
-                title: '',
-                display_admin_controls: true }
+    ul.collection
+      li.collection-header
+      - @hierarchically_ordered_categories.each_with_index do |category, index|
+        li
+          p
+            .blue.lighten-5
+              label.black-text.valign-wrapper[for="checkBox#{category.id}"]
+                .flow-text = "#{'-' * category.level * 5}#{category.name}"
+                = ("&nbsp" * 5).html_safe
+                = button_to 'Delete', admin_category_path(id: category.id), method: :delete, class: 'btn'
+
     a.btn.green[href=new_admin_category_path] New Category
     p
     a.btn.teal[href=admin_index_path] Back
