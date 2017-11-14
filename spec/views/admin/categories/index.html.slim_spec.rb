@@ -5,7 +5,7 @@ RSpec.describe "admin/categories/index.html.slim", type: :view do
     dummy_names = %w[some sample words for testing purpose]
     categories = []
     dummy_names.each do |dummy_name|
-      categories.push FactoryBot.build :category, name: dummy_name
+      categories.push FactoryBot.create :category, name: dummy_name
     end
     assign :hierarchically_ordered_categories, categories
 
