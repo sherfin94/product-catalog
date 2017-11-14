@@ -49,6 +49,20 @@ RSpec.describe Admin::CategoriesController, type: :controller do
 
       expect(response).to redirect_to admin_categories_path
     end
+
+    it 'moves the created category to child of given parent' do
+      parent = FactoryBot.create :category
+      @category_params[:parent_id] = parent.id
+      post :create, params: { category: @category_params }
+      parent.reload
+      expect(Category.last.is_descendant_of?(parent)).to be true
+    end
+
+    it 'makes the created category a root category if parent_id is
+    not specified' do
+      post :create, params: { category: @category_params }
+      expect(Category.last.root?).to be true
+    end
   end
 
   describe 'DELETE #destroy' do
