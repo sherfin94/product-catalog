@@ -45,9 +45,19 @@ RSpec.describe Admin::ProductsController, type: :controller do
   end
 
   describe "DELETE #destroy" do
-    pending "returns http success" do
-      delete :destroy
+    before(:each) do
+      @product = FactoryBot.create :product
+    end
+
+    it "returns http success" do
+      delete :destroy, params: { id: @product.id }
       expect(response).to have_http_status(:success)
+    end
+
+    it 'deletes the product corresponding to the id passed' do
+      expect {
+        delete :destroy, params: { id: @product.id }
+      }.to change(Product, :count).by(-1)
     end
   end
 

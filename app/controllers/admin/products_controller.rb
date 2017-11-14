@@ -13,6 +13,8 @@ class Admin::ProductsController < ApplicationController
   end
 
   def destroy
+   product = Product.find params[:id]
+   product.destroy
   end
 
   private
