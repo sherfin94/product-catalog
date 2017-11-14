@@ -1,5 +1,9 @@
 .row
-  .col.s8
+  .col.s8.push-s1
+    br
+    a.btn.teal[href=admin_index_path] Back
+    = ('&nbsp' * 3).html_safe
+    a.btn.green[href=new_admin_product_path] New Product
     table.striped
       thead
         tr
