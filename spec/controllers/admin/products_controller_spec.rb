@@ -38,6 +38,17 @@ RSpec.describe Admin::ProductsController, type: :controller do
       }.to change(Product, :count).by 1
     end
 
+    it 'pushes the product into the product list of each category id passed' do
+      categories = Array.new(2) { FactoryBot.create :category }
+      post :create, params: {
+        product: @product_params,
+        category_ids: categories.pluck(:id)
+      }
+      categories.each &:reload
+      expect(categories.first.products).to include(Product.last)
+      expect(categories.second.products).to include(Product.last)
+    end
+
     it 'redirects to admin_products_path' do
       post :create, params: { product: @product_params }
       expect(response).to redirect_to admin_products_path
