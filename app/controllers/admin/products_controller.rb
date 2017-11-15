@@ -9,10 +9,7 @@ class Admin::ProductsController < ApplicationController
 
   def create
     product = Product.create! product_params
-    categories = Category.where id: params[:category_ids]
-    categories.each do |category|
-      category.products.push product
-    end
+    product.categories.push Category.where id: params[:category_ids]
     flash[:success] = 'Product created successfully'
     redirect_to admin_products_path
   rescue ActionController::ParameterMissing, ActiveRecord::RecordInvalid
