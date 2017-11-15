@@ -6,7 +6,7 @@ html
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-  body
+  body.light-blue.lighten-5
     = render partial: '/navbar'
     = yield
     = javascript_include_tag 'materialize', 'data-turbolinks-track': 'reload'
