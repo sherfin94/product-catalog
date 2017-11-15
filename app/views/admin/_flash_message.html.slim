@@ -1,0 +1,6 @@
+- if flash[:success]
+  .card-panel.green
+      .white-text = flash[:success]
+- if flash[:failure]
+  .card-panel.red.lighten-2
+      .white-text = flash[:failure]

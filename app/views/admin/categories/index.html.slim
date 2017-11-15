@@ -1,11 +1,6 @@
 .row
   .col.s8
-    - if flash[:success]
-      .card-panel.green
-          .white-text = flash[:success]
-    - if flash[:failure]
-      .card-panel.red.lighten-2
-          .white-text = flash[:failure]
+    = render 'admin/flash_message'
     ul.collection
       li.collection-header
       - @hierarchically_ordered_categories.each_with_index do |category, index|
