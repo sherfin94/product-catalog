@@ -45,6 +45,7 @@ class Admin::ProductsController < ApplicationController
       *(ids_of_categories_of_product - ids_of_categories_in_params)
     )
     product.update(product_params)
+    redirect_to admin_products_path
   end
 
   private

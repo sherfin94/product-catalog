@@ -152,5 +152,10 @@ RSpec.describe Admin::ProductsController, type: :controller do
       @product.reload
       expect(@product.categories).not_to include category
     end
+
+    it 'redirects to admin_products_path' do
+      patch :update, params: { id: @product.id, product: @product_params }
+      expect(response).to redirect_to admin_products_path
+    end
   end
 end
