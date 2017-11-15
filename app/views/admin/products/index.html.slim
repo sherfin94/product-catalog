@@ -1,5 +1,5 @@
 .row
-  .col.s8.push-s1
+  .col.s10.push-s1
     br
     = render 'admin/flash_message'
     a.btn.teal[href=admin_index_path] Back
@@ -13,6 +13,7 @@
           th Description
           th Price
           th Delete
+          th Edit
       tbody
         - @products.each do |product|
           tr
@@ -21,3 +22,4 @@
             td = product.description
             td = product.price
             td = button_to 'Delete', (admin_product_path id: product.id), method: :delete, class: 'btn red'
+            td = button_to 'Edit', (edit_admin_product_path id: product.id), method: :get, class: 'btn teal'
