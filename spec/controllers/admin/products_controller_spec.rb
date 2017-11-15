@@ -157,5 +157,10 @@ RSpec.describe Admin::ProductsController, type: :controller do
       patch :update, params: { id: @product.id, product: @product_params }
       expect(response).to redirect_to admin_products_path
     end
+
+    it 'sets flash success message' do
+      patch :update, params: { id: @product.id, product: @product_params }
+      expect(flash[:success]).to be_present
+    end
   end
 end
