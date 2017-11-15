@@ -13,6 +13,7 @@ class Admin::ProductsController < ApplicationController
     categories.each do |category|
       category.products.push product
     end
+    flash[:success] = 'Product created successfully'
     redirect_to admin_products_path
   end
 

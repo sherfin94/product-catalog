@@ -53,6 +53,11 @@ RSpec.describe Admin::ProductsController, type: :controller do
       post :create, params: { product: @product_params }
       expect(response).to redirect_to admin_products_path
     end
+
+    it 'sets flash[:success] when a product is created' do
+      post :create, params: { product: @product_params }
+      expect(flash[:success]).to be_present
+    end
   end
 
   describe "DELETE #destroy" do
