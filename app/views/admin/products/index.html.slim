@@ -12,6 +12,7 @@
           th Name
           th Description
           th Price
+          th Categories
           th Delete
           th Edit
       tbody
@@ -21,5 +22,9 @@
             td = product.name
             td = product.description
             td = "#{product.price} SGD"
+            td
+              ul
+                - product.categories.each do |category|
+                  li = category.name
             td = button_to 'Delete', (admin_product_path id: product.id), method: :delete, class: 'btn red'
             td = button_to 'Edit', (edit_admin_product_path id: product.id), method: :get, class: 'btn teal'

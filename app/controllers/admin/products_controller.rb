@@ -1,6 +1,6 @@
 class Admin::ProductsController < ApplicationController
   def index
-    @products = Product.all
+    @products = Product.all.eager_load :categories
   end
 
   def new
