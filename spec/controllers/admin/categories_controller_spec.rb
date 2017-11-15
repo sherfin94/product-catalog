@@ -87,5 +87,11 @@ RSpec.describe Admin::CategoriesController, type: :controller do
 
       expect(response).to redirect_to admin_categories_path
     end
+
+    it 'sends a success messag through flash' do
+      delete :destroy, params: { id: @category.id }
+
+      expect(flash[:success]).to be_present
+    end
   end
 end
