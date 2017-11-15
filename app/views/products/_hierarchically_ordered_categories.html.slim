@@ -1,18 +1,20 @@
-ul.collection
-  li.collection-header
-    h4 = title
-  - categories.each_with_index do |category, index|
-    li
-      .col[class="s#{category.level + 1}"]
+p
+  .card-panel.teal.lighten-2.white-text
+    ul
+      li
+        h4 = title
+      - categories.each_with_index do |category, index|
+        li
+          .col[class="s#{category.level + 1}"]
 
-      input.filled-in.categoryCheckBox[type='checkbox',
-       id="checkBox#{category.id}" data-id="#{category.id}"
-       data-parent-id="#{category.parent_id}"
-       checked=(checked_category_ids.include? category.id)]
-      label.black-text[for="checkBox#{category.id}"]
-        = category.name
-        = ("&nbsp" * 5).html_safe
-        - unless not display_admin_controls
-          .secondary-content
-            = button_to 'Delete', admin_category_path(id: category.id), method: :delete
-    br
+          input.filled-in.categoryCheckBox[type='checkbox',
+           id="checkBox#{category.id}" data-id="#{category.id}"
+           data-parent-id="#{category.parent_id}"
+           checked=(checked_category_ids.include? category.id)]
+          label.white-text[for="checkBox#{category.id}"]
+            = category.name
+            = ("&nbsp" * 5).html_safe
+            - unless not display_admin_controls
+              .secondary-content
+                = button_to 'Delete', admin_category_path(id: category.id), method: :delete
+        br
