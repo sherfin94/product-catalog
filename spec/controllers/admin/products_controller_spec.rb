@@ -97,6 +97,15 @@ RSpec.describe Admin::ProductsController, type: :controller do
     end
   end
 
+  describe 'GET #edit' do
+    it 'assigns @product with the instance corresponding to id
+      in params, to its view' do
+        product = FactoryBot.create :product
+        get :edit, params: { id: product.id }
+        expect(assigns(:product)).to eq product
+      end
+  end
+
   describe 'PATCH #update' do
     it 'updates the specified product with data from params' do
       product = FactoryBot.create :product

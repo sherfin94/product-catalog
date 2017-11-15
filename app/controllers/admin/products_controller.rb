@@ -30,6 +30,10 @@ class Admin::ProductsController < ApplicationController
     redirect_to admin_products_path
   end
 
+  def edit
+    @product = Product.find_by id: params[:id]
+  end
+
   def update
     product = Product.find_by id: params[:id]
     product.update(product_params)
