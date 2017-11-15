@@ -9,10 +9,13 @@ class Admin::CategoriesController < ApplicationController
   end
 
   def create
-    category = Category.create category_params
+    category = Category.create! category_params
     parent = Category.find_by(id: category_params[:parent_id])
     category.move_to_child_of parent unless parent.nil?
     flash[:success] = 'Category Created'
+  rescue ActiveRecord::RecordInvalid
+    flash[:failure] = 'Failed to create category'
+  ensure
     redirect_to admin_categories_path
   end
 

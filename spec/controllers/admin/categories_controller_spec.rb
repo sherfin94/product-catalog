@@ -69,6 +69,12 @@ RSpec.describe Admin::CategoriesController, type: :controller do
 
       expect(flash[:success]).to be_present
     end
+
+    it 'sends a failure message if ActiveRecord::RecordInvalid is raised' do
+      post :create, params: { category: {invalid: 'param'} }
+
+      expect(flash[:failure]).to be_present
+    end
   end
 
   describe 'DELETE #destroy' do
