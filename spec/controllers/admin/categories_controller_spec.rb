@@ -52,8 +52,7 @@ RSpec.describe Admin::CategoriesController, type: :controller do
 
     it 'moves the created category to child of given parent' do
       parent = FactoryBot.create :category
-      @category_params[:parent_id] = parent.id
-      post :create, params: { category: @category_params }
+      post :create, params: { category: @category_params, parent_id: parent.id }
       parent.reload
       expect(Category.last.is_descendant_of?(parent)).to be true
     end

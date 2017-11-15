@@ -10,7 +10,7 @@ class Admin::CategoriesController < ApplicationController
 
   def create
     category = Category.create! category_params
-    parent = Category.find_by(id: category_params[:parent_id])
+    parent = Category.find_by(id: params[:parent_id])
     category.move_to_child_of parent unless parent.nil?
     flash[:success] = 'Category Created'
   rescue ActiveRecord::RecordInvalid
@@ -32,6 +32,6 @@ class Admin::CategoriesController < ApplicationController
   private
 
   def category_params
-    params.require(:category).permit(:name, :parent_id)
+    params.require(:category).permit(:name)
   end
 end
