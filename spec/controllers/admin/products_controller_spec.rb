@@ -83,6 +83,18 @@ RSpec.describe Admin::ProductsController, type: :controller do
 
       expect(response).to redirect_to admin_products_path
     end
+
+    it 'sets flash[:success] if product is deleted' do
+      delete :destroy, params: { id: @product.id }
+
+      expect(flash[:success]).to be_present
+    end
+
+    it 'sets flash[:failure] if product could not be found' do
+      delete :destroy, params: { id: -1 }
+
+      expect(flash[:failure]).to be_present
+    end
   end
 
 end

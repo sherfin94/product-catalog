@@ -23,6 +23,10 @@ class Admin::ProductsController < ApplicationController
   def destroy
    product = Product.find params[:id]
    product.destroy
+   flash[:success] = 'Product deleted successfully'
+ rescue ActiveRecord::RecordNotFound
+   flash[:failure] = 'Product not found'
+ ensure
    redirect_to admin_products_path
   end
 
