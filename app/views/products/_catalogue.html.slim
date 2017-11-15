@@ -1,4 +1,4 @@
-.row.blue.lighten-5
+.row
   .col.s4
     #categoryList
       = render partial: 'products/hierarchically_ordered_categories',
@@ -10,13 +10,14 @@
       - @products.each do |product|
           .card.horizontal.valign-wrapper
             .card-image
-              = image_tag 'product.jpg', height: '100px', width: '100px'
-            .card-text
-              ul
-                li
-                  b
-                    span.productName = product.name
-                li
-                  span.productPrice = "#{product.price} SGD"
-                li
-                  span.productDescription = product.description
+              = image_tag 'product.jpg', height: '70px'
+            .col
+              .card-text
+                ul
+                  li
+                    b
+                      span.productName = product.name
+                  li
+                    span.productPrice = "#{product.price} SGD"
+                  li
+                    span.productDescription = product.description
