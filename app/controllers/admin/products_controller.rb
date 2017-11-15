@@ -36,6 +36,14 @@ class Admin::ProductsController < ApplicationController
 
   def update
     product = Product.find_by id: params[:id]
+    ids_of_categories_of_product = product.categories.pluck(:id).map &:to_s
+    ids_of_categories_in_params = Array.wrap(params[:category_ids])
+    product.categories.push Category.where id: (
+      ids_of_categories_in_params - ids_of_categories_of_product
+    )
+    product.categories.delete(
+      *(ids_of_categories_of_product - ids_of_categories_in_params)
+    )
     product.update(product_params)
   end
 

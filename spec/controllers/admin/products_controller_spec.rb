@@ -107,19 +107,50 @@ RSpec.describe Admin::ProductsController, type: :controller do
   end
 
   describe 'PATCH #update' do
-    it 'updates the specified product with data from params' do
-      product = FactoryBot.create :product
-      product_params = product.attributes.slice(
+    before(:each) do
+      @product = FactoryBot.create :product
+      @product_params = @product.attributes.slice(
         'name',
         'description',
         'price'
       )
-      dummy_name = 'dummy_name'
-      product_params['name'] = dummy_name
-      patch :update, params: { id: product.id, product: product_params }
+    end
 
-      product.reload
-      expect(product.name).to eq dummy_name
+    it 'updates the specified product with data from params' do
+      dummy_name = 'dummy_name'
+      @product_params['name'] = dummy_name
+      patch :update, params: { id: @product.id, product: @product_params }
+
+      @product.reload
+      expect(@product.name).to eq dummy_name
+    end
+
+    it 'pushes the product to newly selected categories' do
+      category = FactoryBot.create :category
+
+      patch :update, params: {
+        id: @product.id,
+        product: @product_params,
+        category_ids: [category.id]
+      }
+
+      @product.reload
+      expect(@product.categories).to include category
+    end
+
+    it 'removes the product from product list of categories that
+      are not present in the params' do
+      category = FactoryBot.create :category
+      category.products.push @product
+
+      patch :update, params: {
+        id: @product.id,
+        product: @product_params,
+        category_ids: []
+      }
+
+      @product.reload
+      expect(@product.categories).not_to include category
     end
   end
 end
