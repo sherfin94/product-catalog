@@ -18,7 +18,7 @@
     .row
       .input-field.col.s6
         = select_tag 'category_ids',
-        options_for_select(nested_set_options(Category) {|i| "#{'-' * i.level} #{i.name}" } ),
+        options_for_select(nested_set_options(Category) {|i| "#{'--' * i.level} #{i.name}" } ),
         multiple: true
     .row
       .input-field.col.s6
