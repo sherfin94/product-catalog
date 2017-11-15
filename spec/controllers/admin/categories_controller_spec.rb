@@ -63,6 +63,12 @@ RSpec.describe Admin::CategoriesController, type: :controller do
       post :create, params: { category: @category_params }
       expect(Category.last.root?).to be true
     end
+
+    it 'sends a success messag through flash' do
+      post :create, params: { category: @category_params }
+
+      expect(flash[:success]).to be_present
+    end
   end
 
   describe 'DELETE #destroy' do

@@ -12,6 +12,7 @@ class Admin::CategoriesController < ApplicationController
     category = Category.create category_params
     parent = Category.find_by(id: category_params[:parent_id])
     category.move_to_child_of parent unless parent.nil?
+    flash[:success] = 'Category Created'
     redirect_to admin_categories_path
   end
 
