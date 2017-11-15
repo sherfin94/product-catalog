@@ -8,13 +8,16 @@ class Admin::ProductsController < ApplicationController
   end
 
   def create
-    product = Product.create product_params
+    product = Product.create! product_params
     categories = Category.where id: params[:category_ids]
     categories.each do |category|
       category.products.push product
     end
     flash[:success] = 'Product created successfully'
     redirect_to admin_products_path
+  rescue ActionController::ParameterMissing, ActiveRecord::RecordInvalid
+    flash[:failure] = 'Product could not be created'
+    redirect_to new_admin_product_path
   end
 
   def destroy

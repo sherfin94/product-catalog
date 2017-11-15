@@ -58,6 +58,13 @@ RSpec.describe Admin::ProductsController, type: :controller do
       post :create, params: { product: @product_params }
       expect(flash[:success]).to be_present
     end
+
+    it 'sets flash[:failure] when a product cannot be created
+      and redirects to new_admin_products_path' do
+      post :create, params: { invalid: 'param' }
+      expect(flash[:failure]).to be_present
+      expect(response).to redirect_to new_admin_product_path
+    end
   end
 
   describe "DELETE #destroy" do
