@@ -97,4 +97,20 @@ RSpec.describe Admin::ProductsController, type: :controller do
     end
   end
 
+  describe 'PATCH #update' do
+    it 'updates the specified product with data from params' do
+      product = FactoryBot.create :product
+      product_params = product.attributes.slice(
+        'name',
+        'description',
+        'price'
+      )
+      dummy_name = 'dummy_name'
+      product_params['name'] = dummy_name
+      patch :update, params: { id: product.id, product: product_params }
+
+      product.reload
+      expect(product.name).to eq dummy_name
+    end
+  end
 end
