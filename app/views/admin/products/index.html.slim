@@ -19,4 +19,4 @@
             td = product.name
             td = product.description
             td = product.price
-            td Delete
+            td = button_to 'Delete', (admin_product_path id: product.id), method: :delete, class: 'btn red'

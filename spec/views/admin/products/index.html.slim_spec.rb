@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "products/index.html.slim", type: :view do
   it 'displays all the products names, descriptions and prices' do
-    products = Array.new(5) { FactoryBot.build :product }
+    products = Array.new(5) { FactoryBot.create :product }
     assign :products, products
 
     render template: 'admin/products/index.html.slim'
