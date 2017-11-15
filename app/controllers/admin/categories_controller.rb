@@ -23,6 +23,9 @@ class Admin::CategoriesController < ApplicationController
     category = Category.find params[:id]
     category.destroy
     flash[:success] = 'Category deleted'
+  rescue ActiveRecord::RecordNotFound
+    flash[:failure] = 'Category deleted'
+  ensure
     redirect_to admin_categories_path
   end
 

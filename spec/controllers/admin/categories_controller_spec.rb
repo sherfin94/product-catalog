@@ -99,5 +99,11 @@ RSpec.describe Admin::CategoriesController, type: :controller do
 
       expect(flash[:success]).to be_present
     end
+
+    it 'sends a failure message if ActiveRecord::RecordNotFound is raised' do
+      delete :destroy, params: { id: '-1' }
+
+      expect(flash[:failure]).to be_present
+    end
   end
 end
