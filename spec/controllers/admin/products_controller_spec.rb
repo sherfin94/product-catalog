@@ -162,5 +162,11 @@ RSpec.describe Admin::ProductsController, type: :controller do
       patch :update, params: { id: @product.id, product: @product_params }
       expect(flash[:success]).to be_present
     end
+
+    it 'sets flash failure message if product cannot be updated' do
+      @product_params['name'] = ''
+      patch :update, params: { id: @product.id, product: @product_params }
+      expect(flash[:failure]).to be_present
+    end
   end
 end

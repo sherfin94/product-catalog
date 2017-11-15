@@ -41,8 +41,11 @@ class Admin::ProductsController < ApplicationController
     product.categories.delete(
       *(ids_of_categories_of_product - ids_of_categories_in_params)
     )
-    product.update(product_params)
+    product.update! product_params
     flash[:success] = 'Product updated'
+  rescue ActiveRecord::RecordInvalid
+    flash[:failure] = 'Failed to update product'
+  ensure
     redirect_to admin_products_path
   end
 
