@@ -20,6 +20,6 @@
             td = product.id
             td = product.name
             td = product.description
-            td = product.price
+            td = "#{product.price} SGD"
             td = button_to 'Delete', (admin_product_path id: product.id), method: :delete, class: 'btn red'
             td = button_to 'Edit', (edit_admin_product_path id: product.id), method: :get, class: 'btn teal'
