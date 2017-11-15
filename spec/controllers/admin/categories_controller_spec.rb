@@ -64,7 +64,7 @@ RSpec.describe Admin::CategoriesController, type: :controller do
       expect(Category.last.root?).to be true
     end
 
-    it 'sends a success messag through flash' do
+    it 'sends a success message through flash' do
       post :create, params: { category: @category_params }
 
       expect(flash[:success]).to be_present
@@ -88,7 +88,7 @@ RSpec.describe Admin::CategoriesController, type: :controller do
       expect(response).to redirect_to admin_categories_path
     end
 
-    it 'sends a success messag through flash' do
+    it 'sends a success message through flash' do
       delete :destroy, params: { id: @category.id }
 
       expect(flash[:success]).to be_present
