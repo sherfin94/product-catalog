@@ -22,4 +22,6 @@
         multiple: true
     .row
       .input-field.col.s6
-        = form.submit class: 'btn'
+        = form.submit class: 'btn green'
+        = ('&nbsp' * 3).html_safe
+        = link_to 'Back', admin_products_path, class: 'btn teal'
